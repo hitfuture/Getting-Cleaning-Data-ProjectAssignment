@@ -7,13 +7,18 @@ feature.names<-as.vector(features$feature)
 #Test Arena
 subject.test<-read.table("data/UCI-HAR/test/subject_test.txt",col.names=c("subject_id"))
 X_test<-read.table("data/UCI-HAR/test/X_test.txt")
+#Ensure the column name is unique by adding an column number to each name.
+i <-0
+feature.names<-sapply(feature.names,function(x){i<<-i+1; paste(i,x,sep="-")})
+#Set names for the columns
 colnames(X_test)<-feature.names
 length(feature.names)
 length(unique(feature.names))
 y_test<-read.table("data/UCI-HAR/test/y_test.txt",col.names="y")
 y.test<-merge(y_test,activity.labels,by.x="y",by.y="id")
-test.data<-tbl_df(cbind(subject.test,y.test,X_test))
-select(test.data,contains("mean"))
+x.test.std.mean<-tbl_df(X_test)%>%select(matches("(mean|std)"))
+test.data<-tbl_df(cbind(subject.test,y.test,x.test.std.mean))
+
 
 #Train Arena
 subject.train<-read.table("data/UCI-HAR/train/subject_train.txt",col.names=c("subject_id"))
@@ -21,6 +26,6 @@ X_train<-read.table("data/UCI-HAR/train/X_train.txt")
 colnames(X_train)<-feature.names
 y_train<-read.table("data/UCI-HAR/train/y_train.txt",col.names="y")
 y.train<-merge(y_train,activity.labels,by.x="y",by.y="id")
-train.data<-tbl_df(cbind(subject.train,y.train,X_train))
-
+x.train.std.mean<-tbl_df(X_train)%>%select(matches("(mean|std)"))
+train.data<-tbl_df(cbind(subject.train,y.train,x.train.std.mean))
  
