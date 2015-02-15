@@ -1,0 +1,19 @@
+---
+title: "CodeBook"
+author: "Brett Taylor"
+date: "February 13, 2015"
+output: html_document
+---
+ variables, the data, and any transformations or work that you performed to clean up the data 
+Transformations
+Variables
+
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
