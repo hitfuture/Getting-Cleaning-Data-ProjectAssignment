@@ -15,19 +15,19 @@ unique.features <- function () {
 
 feature.names <- unique.features()
 #Read in the training and test sets
-X_test<-fread("data/UCI-HAR/test/X_test.txt")
-X_train<-fread("data/UCI-HAR/train/X_train.txt")
+X_test<-read.table("data/UCI-HAR/test/X_test.txt")
+X_train<-read.table("data/UCI-HAR/train/X_train.txt")
 #Set the feature names for the columns names
 colnames(X_test)<-feature.names
 colnames(X_train)<-feature.names
 
 #Read in the Y data
-y_test<-fread("data/UCI-HAR/test/y_test.txt",col.names="y")
-y_train<-fread("data/UCI-HAR/train/y_train.txt",col.names="y")
+y_test<-read.table("data/UCI-HAR/test/y_test.txt",col.names="y")
+y_train<-read.table("data/UCI-HAR/train/y_train.txt",col.names="y")
 
 #Read Subject data
-subject.test<-fread("data/UCI-HAR/test/subject_test.txt",col.names=c("subject_id"))
-subject.train<-fread("data/UCI-HAR/train/subject_train.txt",col.names=c("subject_id"))
+subject.test<-read.table("data/UCI-HAR/test/subject_test.txt",col.names=c("subject_id"))
+subject.train<-read.table("data/UCI-HAR/train/subject_train.txt",col.names=c("subject_id"))
 #Combine the data frames by columns
 
 test.data<-cbind(subject.test,y_test,X_test)
@@ -41,7 +41,7 @@ all.data<-rbind(test.data,train.data)
 #Extracts only the measurements on the mean and standard deviation for each measurement.
 
 #Uses descriptive activity names to name the activities in the data set
-activity.labels<-fread("data/UCI-HAR/activity_labels.txt",col.names=c("id","activity"))
+activity.labels<-read.table("data/UCI-HAR/activity_labels.txt",col.names=c("id","activity"))
 all.data.labeled <-all.data %>% merge(activity.labels,by.x="y",by.y="id")
 #Appropriately labels the data set with descriptive variable names. 
 
