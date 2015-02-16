@@ -21,31 +21,36 @@ X_train<-read.table("data/UCI-HAR/train/X_train.txt")
 colnames(X_test)<-feature.names
 colnames(X_train)<-feature.names
 
+
+#Extract out only the columns with mean and standard deviation
+# This method includes all columns in this category whether they are frequency or time based.
+X_test.std.mean<-tbl_df(X_test)%>%select(matches("(mean|std)"))
+X_train.std.mean<-tbl_df(X_train)%>%select(matches("(mean|std)"))
+
 #Read in the Y data
 y_test<-read.table("data/UCI-HAR/test/y_test.txt",col.names="y")
 y_train<-read.table("data/UCI-HAR/train/y_train.txt",col.names="y")
 
+##Use descriptive activity names to name the activities in the data set
+activity.labels<-read.table("data/UCI-HAR/activity_labels.txt",col.names=c("id","activity"))
+y_test.labeled <-y_test %>% merge(activity.labels,by.x="y",by.y="id")
+y_train.labeled <-y_train %>% merge(activity.labels,by.x="y",by.y="id")
 #Read Subject data
 subject.test<-read.table("data/UCI-HAR/test/subject_test.txt",col.names=c("subject_id"))
 subject.train<-read.table("data/UCI-HAR/train/subject_train.txt",col.names=c("subject_id"))
+
+
 #Combine the data frames by columns
-
-test.data<-cbind(subject.test,y_test,X_test)
-train.data<-cbind(subject.train,y_train,X_train)
-
-
+test.data<-cbind(subject.test,y_test,X_test.std.mean)
+train.data<-cbind(subject.train,y_train,X_train.std.mean)
 
 #Merge the training and the test sets to create one data set.
 all.data<-rbind(test.data,train.data)
 
-#Extracts only the measurements on the mean and standard deviation for each measurement.
-
-#Uses descriptive activity names to name the activities in the data set
-activity.labels<-read.table("data/UCI-HAR/activity_labels.txt",col.names=c("id","activity"))
-all.data.labeled <-all.data %>% merge(activity.labels,by.x="y",by.y="id")
-#Appropriately labels the data set with descriptive variable names. 
+#Label the data set with descriptive variable names. 
 
 
 #From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-#group_by(.data = )
+tidy.data<-all.data %>% group_by(activity,subject_id ) %>% summarize()
+tidy.data
