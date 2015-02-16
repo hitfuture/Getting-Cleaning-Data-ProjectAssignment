@@ -41,16 +41,22 @@ subject.train<-read.table("data/UCI-HAR/train/subject_train.txt",col.names=c("su
 
 
 #Combine the data frames by columns
-test.data<-cbind(subject.test,y_test,X_test.std.mean)
-train.data<-cbind(subject.train,y_train,X_train.std.mean)
+test.data<-cbind(subject.test,y_test.labeled,X_test.std.mean)
+train.data<-cbind(subject.train,y_train.labeled,X_train.std.mean)
 
 #Merge the training and the test sets to create one data set.
 all.data<-rbind(test.data,train.data)
 
-#Label the data set with descriptive variable names. 
 
+#Label the data set with descriptive variable names. 
+##Remove the y variable because it is of little value since the activity is in text format.
+all.data <- all.data %>% select(-y)
 
 #From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-tidy.data<-all.data %>% group_by(activity,subject_id ) %>% summarize()
-tidy.data
+grouped.data<-all.data %>% group_by(activity,subject_id ) 
+#summarize(grouped.data,n_obs=n(),mean(grouped.data[,3]))
+
+cols<-names(all.data)[3:length(names(all.data))]
+tidy.data <-aggregate(all.data[,cols], list(Activity=all.data$activity,Subject=all.data$subject_id), FUN=mean)
+tidy.data <- arrange(tidy.data,Activity,Subject)
