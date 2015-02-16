@@ -9,7 +9,7 @@ library(data.table)
 unique.features <- function () {
         #Read in the features 
         features<-tbl_df(read.table("data/UCI-HAR/features.txt",col.names=c("id","feature"),stringsAsFactors=FALSE))
-        result<-features %>% mutate(feature.names = paste(id,feature,sep="-")) 
+        result<-features %>% mutate(feature.names = paste(paste("c",id,sep=""),feature,sep="-")) 
         result$feature.names
 }
 
@@ -55,7 +55,7 @@ all.data <- all.data %>% select(-y)
 #From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 grouped.data<-all.data %>% group_by(activity,subject_id ) 
-#summarize(grouped.data,n_obs=n(),mean(grouped.data[,3]))
+data.counts<-summarize(grouped.data,n_obs=n())
 
 cols<-names(all.data)[3:length(names(all.data))]
 tidy.data <-aggregate(all.data[,cols], list(Activity=all.data$activity,Subject=all.data$subject_id), FUN=mean)
