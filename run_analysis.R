@@ -10,11 +10,15 @@ library(data.table)
 unique.features <- function () {
         #Read in the features 
         features<-tbl_df(read.table("data/UCI-HAR/features.txt",col.names=c("id","feature"),stringsAsFactors=FALSE))
+        #Prepend the feature id to the feature name to create a name that has the source column in it.
         result<-features %>% mutate(feature.names = paste(sprintf("c%03d", id),feature,sep="-")) 
         #Substitute -frequency for the -f and time for -t to make the column names more legible
         names<-result$feature.names
         names<-gsub("-f","-frequency",names)
         names<-gsub("-t","-time",names)
+        names<-gsub("\\()$","",names)
+        names<-gsub("\\()","_",names)
+        names<-gsub(",","_",names)
         names
 }
 
@@ -30,8 +34,8 @@ colnames(X_train)<-feature.names
 
 #Extract out only the columns with mean and standard deviation
 #This method includes all columns in this category whether they are frequency or time based.
-X_test.std.mean<-tbl_df(X_test)%>%select(matches("(mean|std)"))
-X_train.std.mean<-tbl_df(X_train)%>%select(matches("(mean|std)"))
+X_test.std.mean<-tbl_df(X_test)%>%select(matches("([M,m]ean|[S,s]td)"))
+X_train.std.mean<-tbl_df(X_train)%>%select(matches("([M,m]ean|[S,s]td)"))
 
 #Read in the Y data
 y_test<-read.table("data/UCI-HAR/test/y_test.txt",col.names="y")
