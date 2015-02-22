@@ -27,3 +27,55 @@ expect_equal(unique.features(),unique(feature.names2()))
 
 test.vals1<-feature.names()
 test.vals2<-unique.features()
+
+
+#Let's read in the data
+feature.names <- normalized.features()
+#Read in the training and test sets
+X_test<-read.table("data/UCI-HAR/test/X_test.txt")
+X_train<-read.table("data/UCI-HAR/train/X_train.txt")
+
+#Set the feature names for the columns names
+colnames(X_test)<-feature.names
+colnames(X_train)<-feature.names
+
+
+#Extract out only the columns with mean and standard deviation
+#This method includes all columns in this category whether they are frequency or time based.
+X_test.std.mean<-X_test%>%select(matches("([M,m]ean|[S,s]td)"))
+X_train.std.mean<-X_train%>%select(matches("([M,m]ean|[S,s]td)"))
+
+#Read in the Y data
+y_test<-read.table("data/UCI-HAR/test/y_test.txt",col.names="y")
+y_train<-read.table("data/UCI-HAR/train/y_train.txt",col.names="y")
+
+#Use descriptive activity names to name the activities in the data set
+activity.labels<-read.table("data/UCI-HAR/activity_labels.txt",col.names=c("id","activity"))
+y_test.labeled <-y_test %>% merge(activity.labels,by.x="y",by.y="id")
+y_train.labeled <-y_train %>% merge(activity.labels,by.x="y",by.y="id")
+
+#Read Subject data
+subject.test<-read.table("data/UCI-HAR/test/subject_test.txt",col.names=c("subject_id"))
+subject.train<-read.table("data/UCI-HAR/train/subject_train.txt",col.names=c("subject_id"))
+
+
+#Combine the data frames by columns
+test.data<-cbind(subject.test,y_test,X_test)
+train.data<-cbind(subject.train,y_train,X_train)
+
+#Merge the training and the test sets to create one data set.
+all.data.for.testing<-rbind(test.data,train.data)
+before.count<-nrow(all.data.for.testing)
+all.data.for.testing<-all.data.for.testing %>% merge(activity.labels,by.x="y",by.y="id")
+after.count<-nrow(all.data.for.testing)
+expect_equal(before.count,after.count)
+
+
+g_data<-all.data.for.testing%>%group_by(subject_id,activity)%>%summarize(obs.count=n())%>%arrange(subject_id,activity)
+View(g_data)
+sum(g_data$obs.count)
+
+total.obs<-nrow(y_test)+nrow(y_train)
+#We expect that the total number of rows in y data frames will equal the total number 
+#of the calculated observations in the summarized data
+expect_equal(total.obs,sum(g_data$obs.count))
