@@ -2,9 +2,14 @@
 title: "README.md"
 author: "Brett Taylor"
 date: "February 22, 2015"
-output:  
-   md_document:
-        variant: markdown_github
+output:
+  md_document:
+    variant: markdown_github
+  pdf_document: default
+  html_document: default
+  word_document:  
+    fig_caption: yes
+    highlight: tango
 ---
 # Getting and Cleaning Data Course Project
 This course project is focused on collecting, work with and cleaning data, and ultimately creating a tidy data set.  The data source is based on a study of "Human Activity Recognition Using Smartphones Data Set".  The following description is found here: [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).  
@@ -35,11 +40,12 @@ This is the main script that must be run to create the tidy data set. The purpos
 
 _Processing Overview_
 The script was developed to properly load the data, and process it in a simplified method.  
-(1) __Clean Feature names__     
+
+__1  Clean Feature names__     
 
 The process includes first, reading in the feature\_names, and cleaning them up.  The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names,  and abbreviations that are difficult to understand.  A function, normalize.features() is created that replaces these issues with more detail.  I also created a prefix _fid[0-9,0-9,0-9]_  that includes the feature identifier from the source features.txt file.  This allows for simplified tracing of the data back to the source.
 
-_2_ __Read Source Data__   
+__2  Read Source Data__   
 The next step is to read in all of the source data files.  The files that were required include the following:
 
 File                 |Obs # |  Description
@@ -54,14 +60,14 @@ features.txt         | 561  | This includes columns for feature identifier, and 
 activity.txt         | 6    | Columns include activity id, and activity description.  
 __activity_summary.txt__|180   | The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.
 
-_3_ __Combine & Merge data frames__  
+__3  Combine & Merge data frames__  
 
   First combine the columns together from each of the data sets.  This creats a test and training data set.
   Next combine the the test and training data set.  
   
   Output: data.frame all.data
   
-_4_ __Label all.data__     
+__4  Label all.data__     
 
   Add the activity labels to the all.data dataframe.  
 
@@ -105,12 +111,11 @@ if(!file.exists("./data/projdata.zip")) {
 }
 ````
 
-
-
+## Additonal Informaton about data sets.
 
 
 Information about the column names from the data set created in the study.  
-[feature_info.txt][doc1]  
+[features_info.txt][doc1]  
 
 Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc2]  
 
@@ -131,6 +136,6 @@ activityrecognition@smartlab.ws
 (http://www.smartlab.ws)   
 ------ 
 
-[doc1]: data/UCI-HAR/feature_info.txt  "Describes the feature names that were collected in the original study"
+[doc1]: data/UCI-HAR/features_info.txt  "Describes the feature names that were collected in the original study"
 
 [doc2]: https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf "A Public Domain Dataset for Human Activity Recognition Using Smartphones"  
