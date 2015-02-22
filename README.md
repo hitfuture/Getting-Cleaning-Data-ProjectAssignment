@@ -64,11 +64,16 @@ Output: data.frame all.data.labeled
 *5* **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
 
 Output: data.frame all.data.labeled
-*6* **Summarize all.data.labeled**
+**6 **Summarize all.data.labeled\_\_
 
-Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject Output: data.frame tidy.data (7) **Write tidy.data to file**
+Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject
+
+Output: data.frame tidy.data
+
+**7 Write tidy.data to file**
  This file is the final output that contains the summary data from the tidy.data dataframe.
- Output: file "activity\_summary.txt"
+
+Output: file "activity\_summary.txt"
 
 *Script requirements*
 
@@ -92,10 +97,10 @@ The UCI-HAR data set is required to process run this script. Download the data t
     ##Manually unzip the file so that it can be processed.        
     }
 
-Additonal Informaton about data sets.
--------------------------------------
+Additonal Informaton about how the data was created
+---------------------------------------------------
 
-Information about the column names from the data set created in the study.
+Information about the column names from the data set X\_test.txt and X\_train.txt created in the study.
 [features\_info.txt](data/UCI-HAR/features_info.txt "Describes the feature names that were collected in the original study")
 
 Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones](https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf "A Public Domain Dataset for Human Activity Recognition Using Smartphones")

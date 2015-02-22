@@ -77,13 +77,16 @@ _5_ __Select the correct variables for all.data.labeled__
    Only keep the columns that are the subject, activity, and those that include the mean or standard deviation.  The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name.  Use regular expressions to eliminate the other columns.    
 
 Output: data.frame all.data.labeled    
-_6_  __Summarize all.data.labeled__   
+__6  __Summarize all.data.labeled__   
 
   Create a summary of the aggregates grouped by Activity and Subject.  Apply to function mean() to all of the numeric measurement columns. 
   Sort the data by Activity, and Subject
-  Output: data.frame tidy.data
-(7) __Write tidy.data to file__   
+  
+  Output: data.frame tidy.data   
+  
+__7  Write tidy.data to file__   
   This file is the final output that contains the summary data from the tidy.data dataframe.   
+  
   Output: file "activity_summary.txt"    
   
   
@@ -111,10 +114,9 @@ if(!file.exists("./data/projdata.zip")) {
 }
 ````
 
-## Additonal Informaton about data sets.
+## Additonal Informaton about how the data was created
 
-
-Information about the column names from the data set created in the study.  
+Information about the column names from the data set X_test.txt and X_train.txt created in the study.  
 [features_info.txt][doc1]  
 
 Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc2]  
