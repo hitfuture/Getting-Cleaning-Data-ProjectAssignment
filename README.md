@@ -32,8 +32,11 @@ This is the main script that must be run to create the tidy data set. The purpos
 
 1.  **Clean Feature names**
      +Output: character vector feature.names
+
 2.  **Read Source Data**
-     +Output: data.frames X\_test,X\_train,y\_test,y\_train,subject.test,subject.train
+
+        +Output: data.frames X_test,X_train,y_test,y_train,subject.test,subject.train
+
 3.  **Combine & Merge data frames**
      +Output: data.frame all.data
 4.  **Label all.data**

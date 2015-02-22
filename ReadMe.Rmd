@@ -43,7 +43,9 @@ The script was developed to properly load the data, and process it in a simplifi
 
 1.  __Clean Feature names__     
         +Output: character vector feature.names
+        
 2.  __Read Source Data__   
+
         +Output: data.frames X_test,X_train,y_test,y_train,subject.test,subject.train
 3. __Combine & Merge data frames__  
         +Output: data.frame all.data 
