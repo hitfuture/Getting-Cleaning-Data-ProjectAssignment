@@ -37,6 +37,7 @@ _Processing Overview_
 The script was developed to properly load the data, and process it in a simplified method.  The process includes first, reading in the feature\_names, and cleaning them up.  The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names,  and abbreviations that are difficult to understand.  A function, normalize.features() is created that replaces these issues with more detail.  I also created a prefix _fid[0-9,0-9,0-9]_  that includes the feature identifier from the source features.txt file.  This allows for simplified tracing of the data back to the source.
 
 The next step is to read in all of the source data files.  The files that were required include the following:
+
 File              |Obs # |  Description
 ------------------|------|-------------
 subject_train.txt |7352  | This associates the subject identifier with the x and y training observations.

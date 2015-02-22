@@ -30,10 +30,18 @@ This is the main script that must be run to create the tidy data set. The purpos
 
 *Processing Overview* The script was developed to properly load the data, and process it in a simplified method. The process includes first, reading in the feature\_names, and cleaning them up. The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names, and abbreviations that are difficult to understand. A function, normalize.features() is created that replaces these issues with more detail. I also created a prefix *fid[0-9,0-9,0-9]* that includes the feature identifier from the source features.txt file. This allows for simplified tracing of the data back to the source.
 
-The next step is to read in all of the source data files. The files that were required include the following: File |Obs \# | Description ------------------|------|------------- subject\_train.txt |7352 | This associates the subject identifier with the x and y training observations. subject\_test.txt |2947 | This associates the subject identifier with the x and y testing observations. X\_train.txt |7352 | 562 feature measurement columns for each observation. This is the data was sampled for ML training.
-X\_test.txt |2947 | 562 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training. y\_train.txt |7352 | This includes a single attribute that represents the activity code. This is the data was sampled for ML training.
-y\_test.txt |2947 | This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training. features.txt | 561 | This includes columns for feature identifier, and the feature description.
-activity.txt | 6 | Columns include activity id, and activity description.
+The next step is to read in all of the source data files. The files that were required include the following:
+
+|File|Obs \#|Description|
+|----|------|-----------|
+|subject\_train.txt|7352|This associates the subject identifier with the x and y training observations.|
+|subject\_test.txt|2947|This associates the subject identifier with the x and y testing observations.|
+|X\_train.txt|7352|562 feature measurement columns for each observation. This is the data was sampled for ML training.|
+|X\_test.txt|2947|562 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.|
+|y\_train.txt|7352|This includes a single attribute that represents the activity code. This is the data was sampled for ML training.|
+|y\_test.txt|2947|This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.|
+|features.txt|561|This includes columns for feature identifier, and the feature description.|
+|activity.txt|6|Columns include activity id, and activity description.|
 
 *Script requirements*
 
