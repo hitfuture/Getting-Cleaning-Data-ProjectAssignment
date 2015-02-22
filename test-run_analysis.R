@@ -11,7 +11,7 @@ feature.names <- function () {
         #Add a column identifier to ensure the column names are identifiable and unique
         i <-0
         feature.names<-sapply(feature.names,function(x){i<<-i+1; paste(i,x,sep="-")})
-        feature.names
+        feature.names 
 }
 f.names <- normalize.features()
 
