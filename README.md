@@ -25,9 +25,12 @@ Note that the actual process I used to does not follow the exact sequence shown 
 |CodeBook.Rmd|CodeBook.md|R markdown file that generates the code book, CodeBook.md, that describes the data sets, and how they were processed. The document includes embeded R code that creates the complex description of data in an automated fashion.|
 
 **Script:** "run\_analysis.R"
+
 The purpose of this script is to retrieve the data from the UCI-HAR dataset,
 
-*Script requirements* Packages that must be installed:
+*Script requirements*
+
+Packages that must be installed:
 
     install.packages("dplyr")
 

@@ -30,9 +30,11 @@ CodeBook.Rmd   | CodeBook.md          | R markdown file that generates the code 
 
 
 __Script:__ "run_analysis.R"  
+
 The purpose of this script is to retrieve the data from the UCI-HAR dataset, 
 
-_Script requirements_
+_Script requirements_  
+
 Packages that must be installed:  
 ````
 install.packages("dplyr")
