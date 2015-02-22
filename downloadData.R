@@ -8,6 +8,10 @@
 # Description of data set: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 #Step 0. Download data
+if(!file.exists("/data")) {
+        dir.create("data") 
+}
+
 if(!file.exists("./data/projdata.zip")) {
         data.source.url<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
         download.file(url=data.source.url,destfile="./data/projdata.zip",method="curl")

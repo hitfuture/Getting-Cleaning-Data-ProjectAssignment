@@ -7,7 +7,7 @@ output:
         variant: markdown_github
 ---
 # Getting and Cleaning Data Course Project
-This course project is focused on getting and tidying data.  The data source is:
+This course project is focused on collecting, work with and cleaning data, and ultimately creating a tidy data set.  The data source is based on a study
 
 1. Merge the training and the test sets to create one data set.  
 2. Extract only the measurements on the mean and standard deviation for each measurement.   
@@ -15,11 +15,11 @@ This course project is focused on getting and tidying data.  The data source is:
 4. Appropriately label the data set with descriptive variable names.   
 5. From the data set in step 4, create a second, independent tidy data set with the _average_ of each variable for each activity and each subject.  
 
-
+Note that 
 __Script:__ "run_analysis.R"
 The purpose of this script is to retrieve the data from the UCI-HAR dataset, 
 
-_script requirements
+_Script requirements_
 ````
 install.packages("dplyr")
 ````
@@ -37,7 +37,7 @@ if(!file.exists("./data/projdata.zip")) {
 }
 ````
 
-This repo explains how all of the scripts work and how they are connected.  
+
 
 
 

@@ -1,7 +1,7 @@
 Getting and Cleaning Data Course Project
 ========================================
 
-This course project is focused on getting and tidying data. The data source is:
+This course project is focused on collecting, work with and cleaning data, and ultimately creating a tidy data set. The data source is based on a study
 
 1.  Merge the training and the test sets to create one data set.
 2.  Extract only the measurements on the mean and standard deviation for each measurement.
@@ -9,9 +9,9 @@ This course project is focused on getting and tidying data. The data source is:
 4.  Appropriately label the data set with descriptive variable names.
 5.  From the data set in step 4, create a second, independent tidy data set with the *average* of each variable for each activity and each subject.
 
-**Script:** "run\_analysis.R" The purpose of this script is to retrieve the data from the UCI-HAR dataset,
+Note that **Script:** "run\_analysis.R" The purpose of this script is to retrieve the data from the UCI-HAR dataset,
 
-\_script requirements
+*Script requirements*
 
     install.packages("dplyr")
 
@@ -26,8 +26,6 @@ Download the data to an existing directory named data. If the directory does not
             download.date<-date()
             
     }
-
-This repo explains how all of the scripts work and how they are connected.
 
 Information about the column names from the data set created in the study.
 [feature\_info.txt](data/UCI-HAR/feature_info.txt "Describes the feature names that were collected in the original study")
