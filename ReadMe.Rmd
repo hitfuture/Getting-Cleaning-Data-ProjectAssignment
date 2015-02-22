@@ -34,21 +34,33 @@ __Script:__ "run_analysis.R"
 This is the main script that must be run to create the tidy data set. The purpose of this script is to retrieve the data from the UCI-HAR dataset, and to then process it to create a summary file that is based on the average of each variable grouped by each activity and subject. 
 
 _Processing Overview_
-The script was developed to properly load the data, and process it in a simplified method.  The process includes first, reading in the feature\_names, and cleaning them up.  The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names,  and abbreviations that are difficult to understand.  A function, normalize.features() is created that replaces these issues with more detail.  I also created a prefix _fid[0-9,0-9,0-9]_  that includes the feature identifier from the source features.txt file.  This allows for simplified tracing of the data back to the source.
+The script was developed to properly load the data, and process it in a simplified method.  
+1. __Clean Feature names__     
+The process includes first, reading in the feature\_names, and cleaning them up.  The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names,  and abbreviations that are difficult to understand.  A function, normalize.features() is created that replaces these issues with more detail.  I also created a prefix _fid[0-9,0-9,0-9]_  that includes the feature identifier from the source features.txt file.  This allows for simplified tracing of the data back to the source.
 
+2. __Read Source Data__   
 The next step is to read in all of the source data files.  The files that were required include the following:
 
 File              |Obs # |  Description
 ------------------|------|-------------
 subject_train.txt |7352  | This associates the subject identifier with the x and y training observations.
 subject_test.txt  |2947  | This associates the subject identifier with the x and y testing observations.
-X_train.txt       |7352  | 562 feature measurement columns for each observation. This is the data was sampled for ML training.  
-X_test.txt        |2947  | 562 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.
+X_train.txt       |7352  | 561 feature measurement columns for each observation. This is the data was sampled for ML training.  
+X_test.txt        |2947  | 561 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.
 y_train.txt       |7352  | This includes a single attribute that represents the activity code. This is the data was sampled for ML training.  
 y_test.txt        |2947  | This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.
 features.txt      | 561  | This includes columns for feature identifier, and the feature description.    
 activity.txt      | 6    | Columns include activity id, and activity description.  
 
+3. __Combine & Merge data frames__    
+  Output: data.frame all.data
+4. __Label all.data__     
+  Output: data.frame all.data.labeled
+5. __Summarize all.data.labeled__  
+  Output: data.frame tidy.data
+6. __Write tidy.data to file__   
+  Output: file "activity_summary.txt"    
+  
 
 _Script requirements_  
 
