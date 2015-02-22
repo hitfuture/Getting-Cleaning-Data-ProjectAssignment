@@ -8,22 +8,12 @@ output:
 ---
 
 
-Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc1]
+Information about the column names from the data set created in the study. [feature_info.txt][doc1]
+Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc2]
 
 
-
-
-```{r}
-summary(cars)
-```
-
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+  
+ 
 
 ==================================================================
 Human Activity Recognition Using Smartphones Dataset
@@ -36,5 +26,5 @@ Via Opera Pia 11A, I-16145, Genoa, Italy.
 activityrecognition@smartlab.ws
 www.smartlab.ws
 ==================================================================
-
-[doc1]: https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf "A Public Domain Dataset for Human Activity Recognition Using Smartphones"
+[doc1]: ./data/UCI-HAR/feature_info.txt  "Describes the feature names that were collected in the original study"
+[doc2]: https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf "A Public Domain Dataset for Human Activity Recognition Using Smartphones"
