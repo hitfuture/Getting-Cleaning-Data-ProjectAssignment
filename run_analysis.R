@@ -78,4 +78,4 @@ tidy.data <-aggregate(all.data.labeled[,column.names.mean], list(Activity=all.da
 tidy.data <- arrange(tidy.data,Activity,Subject)
 
 #Write the tidy.data data frame to the output file.
-write.table(tidy.data,"activity-measurement-by-subject.txt",row.names = FALSE)
+write.table(tidy.data,"activity-summary.txt",row.names = FALSE)
