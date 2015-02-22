@@ -21,8 +21,8 @@ Note that the actual process I used to does not follow the exact sequence shown 
 |------|------|-------|
 |downloadData.R|./data/projdata.zip|Download required input data to ensure they are ready.|
 |run\_analysis.R|activity\_summary.txt|Process the input data, and create a summary file based on the mean of the selected measurements.|
-|README.Rmd|README.md|Generate the README.md markup that describes the processes associated with this project. This document is that file.|
-|CodeBook.Rmd|CodeBook.md|Generate the code book that describes the data sets, and how they were processed. The document includes embeded R code that creates the complex description of data in an automated fashion.|
+|README.Rmd|README.md|R markdown file that generates the README.md markdown file. It describes the processes associated with this project. This document is that file.|
+|CodeBook.Rmd|CodeBook.md|R markdown file that generates the code book, CodeBook.md, that describes the data sets, and how they were processed. The document includes embeded R code that creates the complex description of data in an automated fashion.|
 
 **Script:** "run\_analysis.R"
 The purpose of this script is to retrieve the data from the UCI-HAR dataset,
