@@ -42,20 +42,25 @@ _Processing Overview_
 The script was developed to properly load the data, and process it in a simplified method.  
 
 1.  __Clean Feature names__     
-        +Output: character vector feature.names
         
+        +Output: character vector feature.names
 2.  __Read Source Data__   
 
         +Output: data.frames X_test,X_train,y_test,y_train,subject.test,subject.train
 3. __Combine & Merge data frames__  
+
         +Output: data.frame all.data 
 4. __Label all.data__     
+
         +Output: data.frame all.data.labeled 
 5. __Select the correct variables for all.data.labeled__
+
         +Output: data.frame all.data.labeled    
 6.  __Summarize all.data.labeled__   
+
         +Output: data.frame tidy.data    
 7. __Write tidy.data to file__   
+
         +Output: file "activity_summary.txt"    
   
 *******  
