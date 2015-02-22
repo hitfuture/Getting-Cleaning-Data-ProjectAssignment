@@ -2,7 +2,7 @@
 title: "FAQ-Course-Project"
 author: "David Hood"
 date: "February 4, 2015"
-output: html_document
+output: word_document
 ---
 Here is my compendium of useful information about the course Project.
 
