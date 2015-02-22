@@ -1,5 +1,17 @@
 Getting and Cleaning Data Course Project
-----------------------------------------
+========================================
+
+This course project is focused on getting and tidying data. The source of the data is the
+
+    if(!file.exists("./data/projdata.zip")) {
+            data.source.url<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+            download.file(url=data.source.url,destfile="./data/projdata.zip",method="curl")
+            #unzip the data
+            download.date<-date()
+            
+    }
+
+This repo explains how all of the scripts work and how they are connected.
 
 Information about the column names from the data set created in the study.
 [feature\_info.txt](data/UCI-HAR/feature_info.txt "Describes the feature names that were collected in the original study")
