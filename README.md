@@ -29,7 +29,8 @@ Note that the actual process I used to does not follow the exact sequence shown 
 This is the main script that must be run to create the tidy data set. The purpose of this script is to retrieve the data from the UCI-HAR dataset, and to then process it to create a summary file that is based on the average of each variable grouped by each activity and subject.
 
 *Processing Overview* The script was developed to properly load the data, and process it in a simplified method.
-1. **Clean Feature names**
+(1) **Clean Feature names**
+
 The process includes first, reading in the feature\_names, and cleaning them up. The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names, and abbreviations that are difficult to understand. A function, normalize.features() is created that replaces these issues with more detail. I also created a prefix *fid[0-9,0-9,0-9]* that includes the feature identifier from the source features.txt file. This allows for simplified tracing of the data back to the source.
 
 1.  **Read Source Data**
@@ -47,12 +48,20 @@ The process includes first, reading in the feature\_names, and cleaning them up.
 |activity.txt|6|Columns include activity id, and activity description.|
 |**activity\_summary.txt**|180|The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.|
 
-. **Combine & Merge data frames**
- First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set. Output: data.frame all.data . **Label all.data**
- Add the activity labels to the all.data dataframe. Output: data.frame all.data.labeled . **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
- Output: data.frame all.data.labeled
-. **Summarize all.data.labeled**
- Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject Output: data.frame tidy.data . **Write tidy.data to file**
+1.  **Combine & Merge data frames**
+
+First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set. Output: data.frame all.data
+
+1.  **Label all.data**
+
+Add the activity labels to the all.data dataframe. Output: data.frame all.data.labeled
+
+1.  **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
+     Output: data.frame all.data.labeled
+2.  **Summarize all.data.labeled**
+
+Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject Output: data.frame tidy.data (7) **Write tidy.data to file**
+ This file is the final output that contains the summary data from the tidy.data dataframe.
  Output: file "activity\_summary.txt"
 
 *Script requirements*
