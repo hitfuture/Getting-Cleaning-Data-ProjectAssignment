@@ -6,10 +6,10 @@ output:
    md_document:
         variant: markdown_github
 ---
-## _Getting and Cleaning Data Course Project_
+## Getting and Cleaning Data Course Project
 
-Information about the column names from the data set created in the study.
-[featureinfo.txt][doc1]  
+Information about the column names from the data set created in the study.  
+[feature_info.txt][doc1]  
 
 Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc2]  
 
@@ -17,10 +17,10 @@ Detailed documentation on the study [A Public Domain Dataset for Human Activity 
   
  
 
-==================================================================  
+----
 Human Activity Recognition Using Smartphones Dataset  
 Version 1.0  
-==================================================================  
+
 
 Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.  
 Smartlab - Non Linear Complex Systems Laboratory  
