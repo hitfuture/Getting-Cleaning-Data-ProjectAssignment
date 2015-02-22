@@ -45,15 +45,15 @@ The process includes first, reading in the feature\_names, and cleaning them up.
 |y\_test.txt|2947|This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.|
 |features.txt|561|This includes columns for feature identifier, and the feature description.|
 |activity.txt|6|Columns include activity id, and activity description.|
+|**activity\_summary.txt**|180|The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.|
 
-1.  **Combine & Merge data frames**
-     Output: data.frame all.data
-2.  **Label all.data**
-     Output: data.frame all.data.labeled
-3.  **Summarize all.data.labeled**
-     Output: data.frame tidy.data
-4.  **Write tidy.data to file**
-     Output: file "activity\_summary.txt"
+. **Combine & Merge data frames**
+ First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set. Output: data.frame all.data . **Label all.data**
+ Add the activity labels to the all.data dataframe. Output: data.frame all.data.labeled . **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
+ Output: data.frame all.data.labeled
+. **Summarize all.data.labeled**
+ Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject Output: data.frame tidy.data . **Write tidy.data to file**
+ Output: file "activity\_summary.txt"
 
 *Script requirements*
 
