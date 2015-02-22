@@ -30,50 +30,21 @@ This is the main script that must be run to create the tidy data set. The purpos
 
 *Processing Overview* The script was developed to properly load the data, and process it in a simplified method.
 
-**1 Clean Feature names**
+1.  **Clean Feature names**
+    +Output: character vector feature.names
+2.  **Read Source Data**
+    +Output: data.frames X\_test,X\_train,y\_test,y\_train,subject.test,subject.train
+3.  **Combine & Merge data frames**
+    +Output: data.frame all.data
+4.  **Label all.data**
+    +Output: data.frame all.data.labeled
+5.  **Select the correct variables for all.data.labeled** +Output: data.frame all.data.labeled
+6.  **Summarize all.data.labeled**
+    +Output: data.frame tidy.data
+7.  **Write tidy.data to file**
+    +Output: file "activity\_summary.txt"
 
-The process includes first, reading in the feature\_names, and cleaning them up. The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names, and abbreviations that are difficult to understand. A function, normalize.features() is created that replaces these issues with more detail. I also created a prefix *fid[0-9,0-9,0-9]* that includes the feature identifier from the source features.txt file. This allows for simplified tracing of the data back to the source.
-
-**2 Read Source Data**
-The next step is to read in all of the source data files. The files that were required include the following:
-
-|File|Obs \#|Description|
-|----|------|-----------|
-|subject\_train.txt|7352|This associates the subject identifier with the x and y training observations.|
-|subject\_test.txt|2947|This associates the subject identifier with the x and y testing observations.|
-|X\_train.txt|7352|561 feature measurement columns for each observation. This is the data was sampled for ML training.|
-|X\_test.txt|2947|561 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.|
-|y\_train.txt|7352|This includes a single attribute that represents the activity code. This is the data was sampled for ML training.|
-|y\_test.txt|2947|This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.|
-|features.txt|561|This includes columns for feature identifier, and the feature description.|
-|activity.txt|6|Columns include activity id, and activity description.|
-|**activity\_summary.txt**|180|The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.|
-
-**3 Combine & Merge data frames**
-
-First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set.
-
-Output: data.frame all.data
-
-**4 Label all.data**
-
-Add the activity labels to the all.data dataframe.
-
-Output: data.frame all.data.labeled
-
-*5* **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
-
-Output: data.frame all.data.labeled
-**6 **Summarize all.data.labeled\_\_
-
-Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject
-
-Output: data.frame tidy.data
-
-**7 Write tidy.data to file**
- This file is the final output that contains the summary data from the tidy.data dataframe.
-
-Output: file "activity\_summary.txt"
+* * * * *
 
 *Script requirements*
 
@@ -96,6 +67,8 @@ The UCI-HAR data set is required to process run this script. Download the data t
             download.date<-date()
     ##Manually unzip the file so that it can be processed.        
     }
+
+* * * * *
 
 Additonal Informaton about how the data was created
 ---------------------------------------------------

@@ -217,7 +217,7 @@ The variables included in this data set follow a naming pattern that can help yo
      BodyGyroJerkMag      std      <NA>
      BodyGyroJerkMag meanFreq      <NA>
 
-### License:
+This activity\_summary.txt file has a total of `nrow(td)` observations. \#\#\# License
 
 Use of this dataset in publications must be acknowledged by referencing the following publication [1]
 

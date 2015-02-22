@@ -3,19 +3,67 @@ title: "CodeBook"
 author: "Brett Taylor"
 date: "February 13, 2015"
 output:
-  md_document:
-    variant: markdown_github
-  pdf_document: default
-  html_document:
   word_document:
     fig_caption: yes
     highlight: tango
+  md_document:
+    variant: markdown_github
+  pdf_document: default
+  html_document: default
+  
 ---
 ##Study Design 
 ### The steps to producing the data set. 
- variables, the data, and any transformations or work that you performed to clean up the data 
-Transformations
-Variables
+_Processing Overview_
+The script was developed to properly load the data, and process it in a simplified method.  
+
+__1  Clean Feature names__     
+
+The process includes first, reading in the feature\_names, and cleaning them up.  The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names,  and abbreviations that are difficult to understand.  A function, normalize.features() is created that replaces these issues with more detail.  I also created a prefix _fid[0-9,0-9,0-9]_  that includes the feature identifier from the source features.txt file.  This allows for simplified tracing of the data back to the source.
+
+__2  Read Source Data__   
+The next step is to read in all of the source data files.  The files that were required include the following:
+
+File                 |Obs # |  Description
+---------------------|------|-------------
+subject_train.txt    |7352  | This associates the subject identifier with the x and y training observations.
+subject_test.txt     |2947  | This associates the subject identifier with the x and y testing observations.
+X_train.txt          |7352  | 561 feature measurement columns for each observation. This is the data was sampled for ML training.  
+X_test.txt           |2947  | 561 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.
+y_train.txt          |7352  | This includes a single attribute that represents the activity code. This is the data was sampled for ML training.  
+y_test.txt           |2947  | This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.
+features.txt         | 561  | This includes columns for feature identifier, and the feature description.    
+activity.txt         | 6    | Columns include activity id, and activity description.  
+__activity_summary.txt__|180   | The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.
+
+__3  Combine & Merge data frames__  
+
+  First combine the columns together from each of the data sets.  This creats a test and training data set.
+  Next combine the the test and training data set.  
+  
+  Output: data.frame all.data
+  
+__4  Label all.data__     
+
+  Add the activity labels to the all.data dataframe.  
+
+Output: data.frame all.data.labeled
+  
+_5_ __Select the correct variables for all.data.labeled__
+   Only keep the columns that are the subject, activity, and those that include the mean or standard deviation.  The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name.  Use regular expressions to eliminate the other columns.    
+
+Output: data.frame all.data.labeled    
+__6  __Summarize all.data.labeled__   
+
+  Create a summary of the aggregates grouped by Activity and Subject.  Apply to function mean() to all of the numeric measurement columns. 
+  Sort the data by Activity, and Subject
+  
+  Output: data.frame tidy.data   
+  
+__7  Write tidy.data to file__   
+  This file is the final output that contains the summary data from the tidy.data dataframe.  The activity_summary file meets the requirements of the Course project 5 step (see above).
+  
+  Output: file "activity_summary.txt"   
 
 ###Reference:
 [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
@@ -46,7 +94,8 @@ Function      | na
 dimension     | na
 
 ```{r, echo=FALSE,out.width=300,comment=NA}
-td<-read.table("activity-measurement-by-subject.txt",header = TRUE)
+
+td<-read.table("activity-summary.txt",header = TRUE)
 variables<-names(td)
 feature_index<-regexpr("([0-9][0-9][0-9])",variables)
 features <- rep(NA,length(feature_index))       
@@ -68,15 +117,18 @@ calculations[calc_index!=-1]<-regmatches(variables,calc_index)
 dim_index<-regexpr("[XYZ]|angle",variables)
 dims <- rep(NA,length(dim_index))       
 dims[dim_index!=-1]<-regmatches(variables,dim_index)
-
 variable.definitions<-as.data.frame(cbind(Variable.Name=variables,Feature.Id=features,Domain=domains,Measure=measures,Function=calculations,Dimension=dims))
 print(variable.definitions,row.names = FALSE)
+print.variable.data<-function(row)
+        {(paste("Variable: ",row[1],sep=": "))}
+results<-as.vector(apply(variable.definitions,1,print.variable.data))
 
 
 ```
 
+This activity_summary.txt file has a total of `r nrow(td)` observations, and `r length(names(td))` columns.
 
-### License:
+### License
 
 Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
 
