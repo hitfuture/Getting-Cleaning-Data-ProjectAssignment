@@ -44,6 +44,7 @@ y_train<-read.table("data/UCI-HAR/train/y_train.txt",col.names="y")
 subject.test<-read.table("data/UCI-HAR/test/subject_test.txt",col.names="subject_id")
 subject.train<-read.table("data/UCI-HAR/train/subject_train.txt",col.names="subject_id")
 
+# Combining and Merging dataframes.
 #Combine the data frames by columns
 test.data<-cbind(subject.test,y_test,X_test)
 train.data<-cbind(subject.train,y_train,X_train)
@@ -51,17 +52,21 @@ train.data<-cbind(subject.train,y_train,X_train)
 #Merge the training and the test sets to create one data set.
 all.data<-rbind(test.data,train.data)
 
+#Labeling the data 
 #Use descriptive activity names to name the activities in the data set
 activity.labels<-read.table("data/UCI-HAR/activity_labels.txt",col.names=c("id","activity"))
+#Use the merge command to combine the activity data set to the all.data.labeled data set.
 all.data.labeled <-all.data %>% merge(activity.labels,by.x="y",by.y="id")
  
-#Remove the y variable because it is of little value since the activity is in text format.
-all.data.labeled <- all.data.labeled %>% select(-y)
 
 #Extract out only the columns with mean and standard deviation
 #This method includes all columns in this category whether they are frequency or time based.
 #We will eliminate the angle features because they are combinations of other features which
 #may be based on features with mean.  This does not mean they are a mean function.  
+
+#First Remove the y variable because it is of little value since the activity is in text format.
+all.data.labeled <- all.data.labeled %>% select(-y)
+
 all.data.labeled<-all.data.labeled%>%select(matches("(([M,m]ean|[S,s]td))|activity|subject_id"),-matches("angle"))
  
 #Ceate a second, independent tidy data set with the average of each variable 
