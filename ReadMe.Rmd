@@ -9,9 +9,9 @@ output:
 ## _Getting and Cleaning Data Course Project_
 
 Information about the column names from the data set created in the study.
-[featureinfo.txt][doc1]
+[featureinfo.txt][doc1]  
 
-Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc2]
+Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc2]  
 
 
   
@@ -32,4 +32,4 @@ activityrecognition@smartlab.ws
 
 [doc1]: data/UCI-HAR/feature_info.txt  "Describes the feature names that were collected in the original study"
 
-[doc2]: https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf "A Public Domain Dataset for Human Activity Recognition Using Smartphones"
+[doc2]: https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf "A Public Domain Dataset for Human Activity Recognition Using Smartphones"  
