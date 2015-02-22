@@ -2,7 +2,7 @@
 title: "README.md"
 author: "Brett Taylor"
 date: "February 22, 2015"
-output: 
+output:  
    md_document:
         variant: markdown_github
 ---
@@ -27,8 +27,8 @@ Smartlab - Non Linear Complex Systems Laboratory
 DITEN - Universit? degli Studi di Genova.  
 Via Opera Pia 11A, I-16145, Genoa, Italy.  
 activityrecognition@smartlab.ws  
-(www.smartlab.ws)    
-==================================================================  
+(http://www.smartlab.ws)   
+------ 
 
 [doc1]: data/UCI-HAR/feature_info.txt  "Describes the feature names that were collected in the original study"
 
