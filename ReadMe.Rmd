@@ -1,14 +1,14 @@
 ---
-title: "Read.Me"
+title: "README.md"
 author: "Brett Taylor"
 date: "February 22, 2015"
 output: 
-md_document:
+   md_document:
         variant: markdown_github
 ---
 
 
-link here [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc1]
+Detailed documentation on the study [A Public Domain Dataset for Human Activity Recognition Using Smartphones][doc1]
 
 
 
