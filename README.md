@@ -31,18 +31,18 @@ This is the main script that must be run to create the tidy data set. The purpos
 *Processing Overview* The script was developed to properly load the data, and process it in a simplified method.
 
 1.  **Clean Feature names**
-    +Output: character vector feature.names
+     +Output: character vector feature.names
 2.  **Read Source Data**
-    +Output: data.frames X\_test,X\_train,y\_test,y\_train,subject.test,subject.train
+     +Output: data.frames X\_test,X\_train,y\_test,y\_train,subject.test,subject.train
 3.  **Combine & Merge data frames**
-    +Output: data.frame all.data
+     +Output: data.frame all.data
 4.  **Label all.data**
-    +Output: data.frame all.data.labeled
+     +Output: data.frame all.data.labeled
 5.  **Select the correct variables for all.data.labeled** +Output: data.frame all.data.labeled
 6.  **Summarize all.data.labeled**
-    +Output: data.frame tidy.data
+     +Output: data.frame tidy.data
 7.  **Write tidy.data to file**
-    +Output: file "activity\_summary.txt"
+     +Output: file "activity\_summary.txt"
 
 * * * * *
 
