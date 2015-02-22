@@ -33,8 +33,8 @@ This is the main script that must be run to create the tidy data set. The purpos
 
 The process includes first, reading in the feature\_names, and cleaning them up. The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names, and abbreviations that are difficult to understand. A function, normalize.features() is created that replaces these issues with more detail. I also created a prefix *fid[0-9,0-9,0-9]* that includes the feature identifier from the source features.txt file. This allows for simplified tracing of the data back to the source.
 
-1.  **Read Source Data**
-    The next step is to read in all of the source data files. The files that were required include the following:
+*2* **Read Source Data**
+The next step is to read in all of the source data files. The files that were required include the following:
 
 |File|Obs \#|Description|
 |----|------|-----------|
@@ -48,17 +48,22 @@ The process includes first, reading in the feature\_names, and cleaning them up.
 |activity.txt|6|Columns include activity id, and activity description.|
 |**activity\_summary.txt**|180|The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.|
 
-1.  **Combine & Merge data frames**
+*3* **Combine & Merge data frames**
 
-First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set. Output: data.frame all.data
+First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set.
 
-1.  **Label all.data**
+Output: data.frame all.data
 
-Add the activity labels to the all.data dataframe. Output: data.frame all.data.labeled
+*4* **Label all.data**
 
-1.  **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
-     Output: data.frame all.data.labeled
-2.  **Summarize all.data.labeled**
+Add the activity labels to the all.data dataframe.
+
+Output: data.frame all.data.labeled
+
+*5* **Select the correct variables for all.data.labeled** Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.
+
+Output: data.frame all.data.labeled
+*6* **Summarize all.data.labeled**
 
 Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject Output: data.frame tidy.data (7) **Write tidy.data to file**
  This file is the final output that contains the summary data from the tidy.data dataframe.
