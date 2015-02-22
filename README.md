@@ -9,13 +9,15 @@ This course project is focused on collecting, work with and cleaning data, and u
 4.  Appropriately label the data set with descriptive variable names.
 5.  From the data set in step 4, create a second, independent tidy data set with the *average* of each variable for each activity and each subject.
 
-Note that **Script:** "run\_analysis.R" The purpose of this script is to retrieve the data from the UCI-HAR dataset,
+Note that the actual process I used to does not follow the exact sequence shown above, and it does end up with the outcome that is shown in step 5.
+**Script:** "run\_analysis.R" The purpose of this script is to retrieve the data from the UCI-HAR dataset,
 
-*Script requirements*
+*Script requirements* Packages that must be installed:
 
     install.packages("dplyr")
 
-Download the data to an existing directory named data. If the directory does not exist it will be created.
+Data that must be installed:
+The UCI-HAR data set is required to process run this script. Download the data to an existing directory named data. If the directory does not exist it will be created.
 
     if(!file.exists("/data")) {
             dir.create("data") 
