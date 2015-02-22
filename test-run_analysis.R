@@ -1,6 +1,9 @@
 #install.packages("testthat")
 library(testthat)
 #source("run_analysis.R")
+
+subject.test<-fread("data/UCI-HAR/test/subject_test.txt",header=FALSE,colClasses=c("integer"))
+X_test.foo<-fread("data/UCI-HAR/test/X_test.txt",header=FALSE,colClasses = c("numeric"))
 feature.names <- function () {
         #Read in the features 
         features<-read.table("data/UCI-HAR/features.txt",col.names=c("id","feature"),stringsAsFactors=FALSE)
@@ -10,6 +13,11 @@ feature.names <- function () {
         feature.names<-sapply(feature.names,function(x){i<<-i+1; paste(i,x,sep="-")})
         feature.names
 }
+f.names <- normalize.features()
+
+expect_equal(length(grep("\\(",c("one","(two"))),0)
+
+expect_equal(length(grep("\\(",f.names)),0)
 #This function creates of unique feature names based on the source data file "features.txt".  
 #It concatenates the "id" column to the "feature" column to ensure that the column names are unique.
 #It returns a vector of these unique column names.
@@ -79,3 +87,33 @@ total.obs<-nrow(y_test)+nrow(y_train)
 #We expect that the total number of rows in y data frames will equal the total number 
 #of the calculated observations in the summarized data
 expect_equal(total.obs,sum(g_data$obs.count))
+val <- "c('1','2')"
+result<-eval(parse(text=val))
+val<-"{'This is text'}"
+val<-'{c("LAYING","SITTING","STANDING","WALKING","WALKING_DOWNSTAIRS","WALKING_UPSTAIRS"  )}'
+value.of<-function(val) {eval(parse(text=val))}
+value.of(val)
+rules<-read.csv("column_rules.csv",header=TRUE)
+rules
+
+
+gsub("fid[0-9][0-9][0-9]_(time|frequency|angle)","","fid001_timeBodyAcc_mean_X")
+
+measures<-unique(c("BodyAcc",
+                   "GravityAcc",
+                   "BodyAccJerk",
+                   "BodyGyro",
+                   "BodyGyroJerk",
+                   "BodyAccMag",
+                   "GravityAccMag",
+                   "BodyAccJerkMag",
+                   "BodyGyroMag",
+                   "BodyGyroJerkMag",
+                   "BodyAcc",
+                   "BodyAccJerk",
+                   "BodyGyro",
+                   "BodyAccMag",
+                   "BodyAccJerkMag",
+                   "BodyGyroMag",
+                   "BodyGyroJerkMag"
+))
