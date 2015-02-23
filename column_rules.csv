@@ -1,4 +1,0 @@
-Match,Type,Unit.of.Measure,Range,Description",
-Activity,character,NA,"{c('LAYING','SITTING','STANDING','WALKING','WALKING",
-Subject,numeric,NA,"1:30","The Subject is the participant in the study that performed the activity. The subject is identified by a numeric value."",
-
