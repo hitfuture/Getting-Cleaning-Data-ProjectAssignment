@@ -10,7 +10,7 @@
 
 <meta name="author" content="Brett Taylor" />
 
-<meta name="date" content="2015-02-13" />
+<meta name="date" content="2015-02-22" />
 
 <title>CodeBook</title>
 
@@ -64,29 +64,100 @@ img {
 <div id="header">
 <h1 class="title">CodeBook</h1>
 <h4 class="author"><em>Brett Taylor</em></h4>
-<h4 class="date"><em>February 13, 2015</em></h4>
+<h4 class="date"><em>February 22, 2015</em></h4>
 </div>
 
 
 <div id="study-design" class="section level2">
-<h2><span class="header-section-number">0.1</span> Study Design</h2>
+<h2>Study Design</h2>
 <div id="the-steps-to-producing-the-data-set." class="section level3">
-<h3><span class="header-section-number">0.1.1</span> The steps to producing the data set.</h3>
-<p>variables, the data, and any transformations or work that you performed to clean up the data Transformations Variables</p>
+<h3>The steps to producing the data set.</h3>
+<p><em>Processing Overview</em> The script was developed to properly load the data, and process it in a simplified method. The following are the steps taken to retrieve, and clean the data. The script that performed this process is found in the file “run_analysis.txt”</p>
+<p><strong>1 Clean Feature names</strong></p>
+<p>The process includes first, reading in the feature_names, and cleaning them up. The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names, and abbreviations that are difficult to understand. A function, normalize.features() is created that replaces these issues with more detail. I also created a prefix <em>fid[0-9,0-9,0-9]</em> that includes the feature identifier from the source features.txt file. This allows for simplified tracing of the data back to the source.</p>
+<p><strong>2 Read Source Data</strong><br />The next step is to read in all of the source data files. The files that were required include the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Obs #</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">subject_train.txt</td>
+<td align="left">7352</td>
+<td align="left">This associates the subject identifier with the x and y training observations.</td>
+</tr>
+<tr class="even">
+<td align="left">subject_test.txt</td>
+<td align="left">2947</td>
+<td align="left">This associates the subject identifier with the x and y testing observations.</td>
+</tr>
+<tr class="odd">
+<td align="left">X_train.txt</td>
+<td align="left">7352</td>
+<td align="left">561 feature measurement columns for each observation. This is the data was sampled for ML training.</td>
+</tr>
+<tr class="even">
+<td align="left">X_test.txt</td>
+<td align="left">2947</td>
+<td align="left">561 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.</td>
+</tr>
+<tr class="odd">
+<td align="left">y_train.txt</td>
+<td align="left">7352</td>
+<td align="left">This includes a single attribute that represents the activity code. This is the data was sampled for ML training.</td>
+</tr>
+<tr class="even">
+<td align="left">y_test.txt</td>
+<td align="left">2947</td>
+<td align="left">This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.</td>
+</tr>
+<tr class="odd">
+<td align="left">features.txt</td>
+<td align="left">561</td>
+<td align="left">This includes columns for feature identifier, and the feature description.</td>
+</tr>
+<tr class="even">
+<td align="left">activity.txt</td>
+<td align="left">6</td>
+<td align="left">Columns include activity id, and activity description.</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>activity_summary.txt</strong></td>
+<td align="left">180</td>
+<td align="left">The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3 Combine &amp; Merge data frames</strong></p>
+<p>First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set.</p>
+<p>Output: data.frame all.data</p>
+<p><strong>4 Label all.data</strong></p>
+<p>Add the activity labels to the all.data dataframe.</p>
+<p>Output: data.frame all.data.labeled</p>
+<p><em>5</em> <strong>Select the correct variables for all.data.labeled</strong> Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.</p>
+<p>Output: data.frame all.data.labeled<br /><strong>6 </strong>Summarize all.data.labeled__</p>
+<p>Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject</p>
+<p>Output: data.frame tidy.data</p>
+<p><strong>7 Write tidy.data to file</strong><br /> This file is the final output that contains the summary data from the tidy.data dataframe. The activity_summary file meets the requirements of the Course project 5 step (see above).</p>
+<p>Output: file “activity_summary.txt”</p>
 </div>
 <div id="reference" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Reference:</h3>
+<h3>Reference:</h3>
 <p>[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012</p>
 </div>
 </div>
 <div id="code-book" class="section level2">
-<h2><span class="header-section-number">0.2</span> Code Book</h2>
+<h2>Code Book</h2>
 <div id="includes-a-list-of-the-variables" class="section level3">
-<h3><span class="header-section-number">0.2.1</span> Includes a list of the variables</h3>
+<h3>Includes a list of the variables</h3>
 </div>
 </div>
 <div id="functions" class="section level2">
-<h2><span class="header-section-number">0.3</span> Functions</h2>
+<h2>Functions</h2>
 <pre><code>    Function                       Description
         mean                        Mean value
          std                Standard deviation
@@ -108,7 +179,7 @@ img {
 <hr />
 </div>
 <div id="variables" class="section level2">
-<h2><span class="header-section-number">0.4</span> Variables</h2>
+<h2>Variables</h2>
 <p>The variables included in this data set follow a naming pattern that can help you understand its nature.</p>
 <table>
 <thead>
@@ -120,215 +191,222 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left">variable_name</td>
-<td align="left">This the name of the column displayed in the summary data set.</td>
+<td align="left">This the name of the column label displayed in the activity_summary.txt data set.</td>
 </tr>
 <tr class="even">
 <td align="left">feature_id</td>
-<td align="left">This is the identifier associated with the feature</td>
+<td align="left">This is the identifier associated with the feature.txt file. It will allow you to trace back to the source column in the X_(train</td>
 </tr>
 <tr class="odd">
 <td align="left">domain:</td>
-<td align="left">na</td>
+<td align="left">the measures were are either in the time or frequency domain. This was translated from -f for frequency, or a -t time. The frequency domain was converted from the signal data by fourier transform in the initial data sets.</td>
 </tr>
 <tr class="even">
-<td align="left">measure</td>
-<td align="left">na</td>
+<td align="left">signal</td>
+<td align="left">The measure is based on the following values {BodyAcc,BodyAccJerk, BodyGyro,BodyGyroJerk,BodyAccMag,BodyAccJerk,BodyGyroMag,BodyGyroJerkMag,GravityAcc,GravityAccMag}. Acc==Acceleration, Gyro=Gyration</td>
 </tr>
 <tr class="odd">
 <td align="left">Function</td>
-<td align="left">na</td>
+<td align="left">The functions applied to the signals. The list that were selected are mean(),std(),meanFreq().</td>
 </tr>
 <tr class="even">
 <td align="left">dimension</td>
-<td align="left">na</td>
+<td align="left">This indicates the direction of the vector. values are {X,Y,Z}</td>
 </tr>
 </tbody>
 </table>
-<pre><code>                              variable_name feature_id    domain
-                                   Activity       &lt;NA&gt;      &lt;NA&gt;
-                                    Subject       &lt;NA&gt;      &lt;NA&gt;
-                  fid001_timeBodyAcc_mean_X        001      time
-                  fid002_timeBodyAcc_mean_Y        002      time
-                  fid003_timeBodyAcc_mean_Z        003      time
-                   fid004_timeBodyAcc_std_X        004      time
-                   fid005_timeBodyAcc_std_Y        005      time
-                   fid006_timeBodyAcc_std_Z        006      time
-               fid041_timeGravityAcc_mean_X        041      time
-               fid042_timeGravityAcc_mean_Y        042      time
-               fid043_timeGravityAcc_mean_Z        043      time
-                fid044_timeGravityAcc_std_X        044      time
-                fid045_timeGravityAcc_std_Y        045      time
-                fid046_timeGravityAcc_std_Z        046      time
-              fid081_timeBodyAccJerk_mean_X        081      time
-              fid082_timeBodyAccJerk_mean_Y        082      time
-              fid083_timeBodyAccJerk_mean_Z        083      time
-               fid084_timeBodyAccJerk_std_X        084      time
-               fid085_timeBodyAccJerk_std_Y        085      time
-               fid086_timeBodyAccJerk_std_Z        086      time
-                 fid121_timeBodyGyro_mean_X        121      time
-                 fid122_timeBodyGyro_mean_Y        122      time
-                 fid123_timeBodyGyro_mean_Z        123      time
-                  fid124_timeBodyGyro_std_X        124      time
-                  fid125_timeBodyGyro_std_Y        125      time
-                  fid126_timeBodyGyro_std_Z        126      time
-             fid161_timeBodyGyroJerk_mean_X        161      time
-             fid162_timeBodyGyroJerk_mean_Y        162      time
-             fid163_timeBodyGyroJerk_mean_Z        163      time
-              fid164_timeBodyGyroJerk_std_X        164      time
-              fid165_timeBodyGyroJerk_std_Y        165      time
-              fid166_timeBodyGyroJerk_std_Z        166      time
-                 fid201_timeBodyAccMag_mean        201      time
-                  fid202_timeBodyAccMag_std        202      time
-              fid214_timeGravityAccMag_mean        214      time
-               fid215_timeGravityAccMag_std        215      time
-             fid227_timeBodyAccJerkMag_mean        227      time
-              fid228_timeBodyAccJerkMag_std        228      time
-                fid240_timeBodyGyroMag_mean        240      time
-                 fid241_timeBodyGyroMag_std        241      time
-            fid253_timeBodyGyroJerkMag_mean        253      time
-             fid254_timeBodyGyroJerkMag_std        254      time
-             fid266_frequencyBodyAcc_mean_X        266 frequency
-             fid267_frequencyBodyAcc_mean_Y        267 frequency
-             fid268_frequencyBodyAcc_mean_Z        268 frequency
-              fid269_frequencyBodyAcc_std_X        269 frequency
-              fid270_frequencyBodyAcc_std_Y        270 frequency
-              fid271_frequencyBodyAcc_std_Z        271 frequency
-         fid294_frequencyBodyAcc_meanFreq_X        294 frequency
-         fid295_frequencyBodyAcc_meanFreq_Y        295 frequency
-         fid296_frequencyBodyAcc_meanFreq_Z        296 frequency
-         fid345_frequencyBodyAccJerk_mean_X        345 frequency
-         fid346_frequencyBodyAccJerk_mean_Y        346 frequency
-         fid347_frequencyBodyAccJerk_mean_Z        347 frequency
-          fid348_frequencyBodyAccJerk_std_X        348 frequency
-          fid349_frequencyBodyAccJerk_std_Y        349 frequency
-          fid350_frequencyBodyAccJerk_std_Z        350 frequency
-     fid373_frequencyBodyAccJerk_meanFreq_X        373 frequency
-     fid374_frequencyBodyAccJerk_meanFreq_Y        374 frequency
-     fid375_frequencyBodyAccJerk_meanFreq_Z        375 frequency
-            fid424_frequencyBodyGyro_mean_X        424 frequency
-            fid425_frequencyBodyGyro_mean_Y        425 frequency
-            fid426_frequencyBodyGyro_mean_Z        426 frequency
-             fid427_frequencyBodyGyro_std_X        427 frequency
-             fid428_frequencyBodyGyro_std_Y        428 frequency
-             fid429_frequencyBodyGyro_std_Z        429 frequency
-        fid452_frequencyBodyGyro_meanFreq_X        452 frequency
-        fid453_frequencyBodyGyro_meanFreq_Y        453 frequency
-        fid454_frequencyBodyGyro_meanFreq_Z        454 frequency
-            fid503_frequencyBodyAccMag_mean        503 frequency
-             fid504_frequencyBodyAccMag_std        504 frequency
-        fid513_frequencyBodyAccMag_meanFreq        513 frequency
-        fid516_frequencyBodyAccJerkMag_mean        516 frequency
-         fid517_frequencyBodyAccJerkMag_std        517 frequency
-    fid526_frequencyBodyAccJerkMag_meanFreq        526 frequency
-           fid529_frequencyBodyGyroMag_mean        529 frequency
-            fid530_frequencyBodyGyroMag_std        530 frequency
-       fid539_frequencyBodyGyroMag_meanFreq        539 frequency
-       fid542_frequencyBodyGyroJerkMag_mean        542 frequency
-        fid543_frequencyBodyGyroJerkMag_std        543 frequency
-   fid552_frequencyBodyGyroJerkMag_meanFreq        552 frequency
-          fid555_angle_tBodyAccMean_gravity        555      &lt;NA&gt;
-  fid556_angle_tBodyAccJerkMean_gravityMean        556      &lt;NA&gt;
-     fid557_angle_tBodyGyroMean_gravityMean        557      &lt;NA&gt;
- fid558_angle_tBodyGyroJerkMean_gravityMean        558      &lt;NA&gt;
-                 fid559_angle_X_gravityMean        559      &lt;NA&gt;
-                 fid560_angle_Y_gravityMean        560      &lt;NA&gt;
-                 fid561_angle_Z_gravityMean        561      &lt;NA&gt;
-         measure Function dimension
-            &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;
-            &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;
-         BodyAcc     mean         X
-         BodyAcc     mean         Y
-         BodyAcc     mean         Z
-         BodyAcc      std         X
-         BodyAcc      std         Y
-         BodyAcc      std         Z
-      GravityAcc     mean         X
-      GravityAcc     mean         Y
-      GravityAcc     mean         Z
-      GravityAcc      std         X
-      GravityAcc      std         Y
-      GravityAcc      std         Z
-     BodyAccJerk     mean         X
-     BodyAccJerk     mean         Y
-     BodyAccJerk     mean         Z
-     BodyAccJerk      std         X
-     BodyAccJerk      std         Y
-     BodyAccJerk      std         Z
-        BodyGyro     mean         X
-        BodyGyro     mean         Y
-        BodyGyro     mean         Z
-        BodyGyro      std         X
-        BodyGyro      std         Y
-        BodyGyro      std         Z
-    BodyGyroJerk     mean         X
-    BodyGyroJerk     mean         Y
-    BodyGyroJerk     mean         Z
-    BodyGyroJerk      std         X
-    BodyGyroJerk      std         Y
-    BodyGyroJerk      std         Z
-      BodyAccMag     mean      &lt;NA&gt;
-      BodyAccMag      std      &lt;NA&gt;
-   GravityAccMag     mean      &lt;NA&gt;
-   GravityAccMag      std      &lt;NA&gt;
-  BodyAccJerkMag     mean      &lt;NA&gt;
-  BodyAccJerkMag      std      &lt;NA&gt;
-     BodyGyroMag     mean      &lt;NA&gt;
-     BodyGyroMag      std      &lt;NA&gt;
- BodyGyroJerkMag     mean      &lt;NA&gt;
- BodyGyroJerkMag      std      &lt;NA&gt;
-         BodyAcc     mean         X
-         BodyAcc     mean         Y
-         BodyAcc     mean         Z
-         BodyAcc      std         X
-         BodyAcc      std         Y
-         BodyAcc      std         Z
-         BodyAcc meanFreq         X
-         BodyAcc meanFreq         Y
-         BodyAcc meanFreq         Z
-     BodyAccJerk     mean         X
-     BodyAccJerk     mean         Y
-     BodyAccJerk     mean         Z
-     BodyAccJerk      std         X
-     BodyAccJerk      std         Y
-     BodyAccJerk      std         Z
-     BodyAccJerk meanFreq         X
-     BodyAccJerk meanFreq         Y
-     BodyAccJerk meanFreq         Z
-        BodyGyro     mean         X
-        BodyGyro     mean         Y
-        BodyGyro     mean         Z
-        BodyGyro      std         X
-        BodyGyro      std         Y
-        BodyGyro      std         Z
-        BodyGyro meanFreq         X
-        BodyGyro meanFreq         Y
-        BodyGyro meanFreq         Z
-      BodyAccMag     mean      &lt;NA&gt;
-      BodyAccMag      std      &lt;NA&gt;
-      BodyAccMag meanFreq      &lt;NA&gt;
-  BodyAccJerkMag     mean      &lt;NA&gt;
-  BodyAccJerkMag      std      &lt;NA&gt;
-  BodyAccJerkMag meanFreq      &lt;NA&gt;
-     BodyGyroMag     mean      &lt;NA&gt;
-     BodyGyroMag      std      &lt;NA&gt;
-     BodyGyroMag meanFreq      &lt;NA&gt;
- BodyGyroJerkMag     mean      &lt;NA&gt;
- BodyGyroJerkMag      std      &lt;NA&gt;
- BodyGyroJerkMag meanFreq      &lt;NA&gt;
-         BodyAcc     &lt;NA&gt;     angle
-     BodyAccJerk     &lt;NA&gt;     angle
-        BodyGyro     &lt;NA&gt;     angle
-    BodyGyroJerk     &lt;NA&gt;     angle
-            &lt;NA&gt;     &lt;NA&gt;     angle
-            &lt;NA&gt;     &lt;NA&gt;     angle
-            &lt;NA&gt;     &lt;NA&gt;     angle</code></pre>
-<div id="license" class="section level3">
-<h3><span class="header-section-number">0.4.1</span> License:</h3>
+<hr />
+<p>This activity_summary.txt file has a total of 180 observations, and 81 columns.</p>
+<div id="primary-variables" class="section level3">
+<h3>Primary Variables</h3>
+<ul>
+<li><p><strong>Subject</strong></p>
+<pre><code>This is an integer in the range 1:30 of the subjects that were engaged in the experiment.</code></pre></li>
+<li><p><strong>Activity</strong> This is the type of action the subject was performing during the measurement. Values range from {Laying,Sitting,Standing, Walking,Walking_Downstairs,Walking_Upstairs}</p></li>
+</ul>
+</div>
+<div id="signal-variable-descriptions---variable-feature.id-and-dimension" class="section level3">
+<h3>Signal Variable Descriptions - Variable, Feature.Id and Dimension</h3>
+<p>The following is a description of the fields:</p>
+<pre><code>##                             Variable.Name Feature.Id Dimension
+##                                  Activity       &lt;NA&gt;      &lt;NA&gt;
+##                                   Subject       &lt;NA&gt;      &lt;NA&gt;
+##                 fid001_timeBodyAcc_mean_X        001         X
+##                 fid002_timeBodyAcc_mean_Y        002         Y
+##                 fid003_timeBodyAcc_mean_Z        003         Z
+##                  fid004_timeBodyAcc_std_X        004         X
+##                  fid005_timeBodyAcc_std_Y        005         Y
+##                  fid006_timeBodyAcc_std_Z        006         Z
+##              fid041_timeGravityAcc_mean_X        041         X
+##              fid042_timeGravityAcc_mean_Y        042         Y
+##              fid043_timeGravityAcc_mean_Z        043         Z
+##               fid044_timeGravityAcc_std_X        044         X
+##               fid045_timeGravityAcc_std_Y        045         Y
+##               fid046_timeGravityAcc_std_Z        046         Z
+##             fid081_timeBodyAccJerk_mean_X        081         X
+##             fid082_timeBodyAccJerk_mean_Y        082         Y
+##             fid083_timeBodyAccJerk_mean_Z        083         Z
+##              fid084_timeBodyAccJerk_std_X        084         X
+##              fid085_timeBodyAccJerk_std_Y        085         Y
+##              fid086_timeBodyAccJerk_std_Z        086         Z
+##                fid121_timeBodyGyro_mean_X        121         X
+##                fid122_timeBodyGyro_mean_Y        122         Y
+##                fid123_timeBodyGyro_mean_Z        123         Z
+##                 fid124_timeBodyGyro_std_X        124         X
+##                 fid125_timeBodyGyro_std_Y        125         Y
+##                 fid126_timeBodyGyro_std_Z        126         Z
+##            fid161_timeBodyGyroJerk_mean_X        161         X
+##            fid162_timeBodyGyroJerk_mean_Y        162         Y
+##            fid163_timeBodyGyroJerk_mean_Z        163         Z
+##             fid164_timeBodyGyroJerk_std_X        164         X
+##             fid165_timeBodyGyroJerk_std_Y        165         Y
+##             fid166_timeBodyGyroJerk_std_Z        166         Z
+##                fid201_timeBodyAccMag_mean        201      &lt;NA&gt;
+##                 fid202_timeBodyAccMag_std        202      &lt;NA&gt;
+##             fid214_timeGravityAccMag_mean        214      &lt;NA&gt;
+##              fid215_timeGravityAccMag_std        215      &lt;NA&gt;
+##            fid227_timeBodyAccJerkMag_mean        227      &lt;NA&gt;
+##             fid228_timeBodyAccJerkMag_std        228      &lt;NA&gt;
+##               fid240_timeBodyGyroMag_mean        240      &lt;NA&gt;
+##                fid241_timeBodyGyroMag_std        241      &lt;NA&gt;
+##           fid253_timeBodyGyroJerkMag_mean        253      &lt;NA&gt;
+##            fid254_timeBodyGyroJerkMag_std        254      &lt;NA&gt;
+##            fid266_frequencyBodyAcc_mean_X        266         X
+##            fid267_frequencyBodyAcc_mean_Y        267         Y
+##            fid268_frequencyBodyAcc_mean_Z        268         Z
+##             fid269_frequencyBodyAcc_std_X        269         X
+##             fid270_frequencyBodyAcc_std_Y        270         Y
+##             fid271_frequencyBodyAcc_std_Z        271         Z
+##        fid294_frequencyBodyAcc_meanFreq_X        294         X
+##        fid295_frequencyBodyAcc_meanFreq_Y        295         Y
+##        fid296_frequencyBodyAcc_meanFreq_Z        296         Z
+##        fid345_frequencyBodyAccJerk_mean_X        345         X
+##        fid346_frequencyBodyAccJerk_mean_Y        346         Y
+##        fid347_frequencyBodyAccJerk_mean_Z        347         Z
+##         fid348_frequencyBodyAccJerk_std_X        348         X
+##         fid349_frequencyBodyAccJerk_std_Y        349         Y
+##         fid350_frequencyBodyAccJerk_std_Z        350         Z
+##    fid373_frequencyBodyAccJerk_meanFreq_X        373         X
+##    fid374_frequencyBodyAccJerk_meanFreq_Y        374         Y
+##    fid375_frequencyBodyAccJerk_meanFreq_Z        375         Z
+##           fid424_frequencyBodyGyro_mean_X        424         X
+##           fid425_frequencyBodyGyro_mean_Y        425         Y
+##           fid426_frequencyBodyGyro_mean_Z        426         Z
+##            fid427_frequencyBodyGyro_std_X        427         X
+##            fid428_frequencyBodyGyro_std_Y        428         Y
+##            fid429_frequencyBodyGyro_std_Z        429         Z
+##       fid452_frequencyBodyGyro_meanFreq_X        452         X
+##       fid453_frequencyBodyGyro_meanFreq_Y        453         Y
+##       fid454_frequencyBodyGyro_meanFreq_Z        454         Z
+##           fid503_frequencyBodyAccMag_mean        503      &lt;NA&gt;
+##            fid504_frequencyBodyAccMag_std        504      &lt;NA&gt;
+##       fid513_frequencyBodyAccMag_meanFreq        513      &lt;NA&gt;
+##       fid516_frequencyBodyAccJerkMag_mean        516      &lt;NA&gt;
+##        fid517_frequencyBodyAccJerkMag_std        517      &lt;NA&gt;
+##   fid526_frequencyBodyAccJerkMag_meanFreq        526      &lt;NA&gt;
+##          fid529_frequencyBodyGyroMag_mean        529      &lt;NA&gt;
+##           fid530_frequencyBodyGyroMag_std        530      &lt;NA&gt;
+##      fid539_frequencyBodyGyroMag_meanFreq        539      &lt;NA&gt;
+##      fid542_frequencyBodyGyroJerkMag_mean        542      &lt;NA&gt;
+##       fid543_frequencyBodyGyroJerkMag_std        543      &lt;NA&gt;
+##  fid552_frequencyBodyGyroJerkMag_meanFreq        552      &lt;NA&gt;</code></pre>
+</div>
+<div id="signal-variable-descriptions-cont.---variable-domain-and-signal" class="section level3">
+<h3>Signal Variable Descriptions (cont.) - Variable, Domain and Signal</h3>
+<pre><code>##                             Variable.Name    Domain          Signal
+##                                  Activity      &lt;NA&gt;            &lt;NA&gt;
+##                                   Subject      &lt;NA&gt;            &lt;NA&gt;
+##                 fid001_timeBodyAcc_mean_X      time         BodyAcc
+##                 fid002_timeBodyAcc_mean_Y      time         BodyAcc
+##                 fid003_timeBodyAcc_mean_Z      time         BodyAcc
+##                  fid004_timeBodyAcc_std_X      time         BodyAcc
+##                  fid005_timeBodyAcc_std_Y      time         BodyAcc
+##                  fid006_timeBodyAcc_std_Z      time         BodyAcc
+##              fid041_timeGravityAcc_mean_X      time      GravityAcc
+##              fid042_timeGravityAcc_mean_Y      time      GravityAcc
+##              fid043_timeGravityAcc_mean_Z      time      GravityAcc
+##               fid044_timeGravityAcc_std_X      time      GravityAcc
+##               fid045_timeGravityAcc_std_Y      time      GravityAcc
+##               fid046_timeGravityAcc_std_Z      time      GravityAcc
+##             fid081_timeBodyAccJerk_mean_X      time     BodyAccJerk
+##             fid082_timeBodyAccJerk_mean_Y      time     BodyAccJerk
+##             fid083_timeBodyAccJerk_mean_Z      time     BodyAccJerk
+##              fid084_timeBodyAccJerk_std_X      time     BodyAccJerk
+##              fid085_timeBodyAccJerk_std_Y      time     BodyAccJerk
+##              fid086_timeBodyAccJerk_std_Z      time     BodyAccJerk
+##                fid121_timeBodyGyro_mean_X      time        BodyGyro
+##                fid122_timeBodyGyro_mean_Y      time        BodyGyro
+##                fid123_timeBodyGyro_mean_Z      time        BodyGyro
+##                 fid124_timeBodyGyro_std_X      time        BodyGyro
+##                 fid125_timeBodyGyro_std_Y      time        BodyGyro
+##                 fid126_timeBodyGyro_std_Z      time        BodyGyro
+##            fid161_timeBodyGyroJerk_mean_X      time    BodyGyroJerk
+##            fid162_timeBodyGyroJerk_mean_Y      time    BodyGyroJerk
+##            fid163_timeBodyGyroJerk_mean_Z      time    BodyGyroJerk
+##             fid164_timeBodyGyroJerk_std_X      time    BodyGyroJerk
+##             fid165_timeBodyGyroJerk_std_Y      time    BodyGyroJerk
+##             fid166_timeBodyGyroJerk_std_Z      time    BodyGyroJerk
+##                fid201_timeBodyAccMag_mean      time      BodyAccMag
+##                 fid202_timeBodyAccMag_std      time      BodyAccMag
+##             fid214_timeGravityAccMag_mean      time   GravityAccMag
+##              fid215_timeGravityAccMag_std      time   GravityAccMag
+##            fid227_timeBodyAccJerkMag_mean      time  BodyAccJerkMag
+##             fid228_timeBodyAccJerkMag_std      time  BodyAccJerkMag
+##               fid240_timeBodyGyroMag_mean      time     BodyGyroMag
+##                fid241_timeBodyGyroMag_std      time     BodyGyroMag
+##           fid253_timeBodyGyroJerkMag_mean      time BodyGyroJerkMag
+##            fid254_timeBodyGyroJerkMag_std      time BodyGyroJerkMag
+##            fid266_frequencyBodyAcc_mean_X frequency         BodyAcc
+##            fid267_frequencyBodyAcc_mean_Y frequency         BodyAcc
+##            fid268_frequencyBodyAcc_mean_Z frequency         BodyAcc
+##             fid269_frequencyBodyAcc_std_X frequency         BodyAcc
+##             fid270_frequencyBodyAcc_std_Y frequency         BodyAcc
+##             fid271_frequencyBodyAcc_std_Z frequency         BodyAcc
+##        fid294_frequencyBodyAcc_meanFreq_X frequency         BodyAcc
+##        fid295_frequencyBodyAcc_meanFreq_Y frequency         BodyAcc
+##        fid296_frequencyBodyAcc_meanFreq_Z frequency         BodyAcc
+##        fid345_frequencyBodyAccJerk_mean_X frequency     BodyAccJerk
+##        fid346_frequencyBodyAccJerk_mean_Y frequency     BodyAccJerk
+##        fid347_frequencyBodyAccJerk_mean_Z frequency     BodyAccJerk
+##         fid348_frequencyBodyAccJerk_std_X frequency     BodyAccJerk
+##         fid349_frequencyBodyAccJerk_std_Y frequency     BodyAccJerk
+##         fid350_frequencyBodyAccJerk_std_Z frequency     BodyAccJerk
+##    fid373_frequencyBodyAccJerk_meanFreq_X frequency     BodyAccJerk
+##    fid374_frequencyBodyAccJerk_meanFreq_Y frequency     BodyAccJerk
+##    fid375_frequencyBodyAccJerk_meanFreq_Z frequency     BodyAccJerk
+##           fid424_frequencyBodyGyro_mean_X frequency        BodyGyro
+##           fid425_frequencyBodyGyro_mean_Y frequency        BodyGyro
+##           fid426_frequencyBodyGyro_mean_Z frequency        BodyGyro
+##            fid427_frequencyBodyGyro_std_X frequency        BodyGyro
+##            fid428_frequencyBodyGyro_std_Y frequency        BodyGyro
+##            fid429_frequencyBodyGyro_std_Z frequency        BodyGyro
+##       fid452_frequencyBodyGyro_meanFreq_X frequency        BodyGyro
+##       fid453_frequencyBodyGyro_meanFreq_Y frequency        BodyGyro
+##       fid454_frequencyBodyGyro_meanFreq_Z frequency        BodyGyro
+##           fid503_frequencyBodyAccMag_mean frequency      BodyAccMag
+##            fid504_frequencyBodyAccMag_std frequency      BodyAccMag
+##       fid513_frequencyBodyAccMag_meanFreq frequency      BodyAccMag
+##       fid516_frequencyBodyAccJerkMag_mean frequency  BodyAccJerkMag
+##        fid517_frequencyBodyAccJerkMag_std frequency  BodyAccJerkMag
+##   fid526_frequencyBodyAccJerkMag_meanFreq frequency  BodyAccJerkMag
+##          fid529_frequencyBodyGyroMag_mean frequency     BodyGyroMag
+##           fid530_frequencyBodyGyroMag_std frequency     BodyGyroMag
+##      fid539_frequencyBodyGyroMag_meanFreq frequency     BodyGyroMag
+##      fid542_frequencyBodyGyroJerkMag_mean frequency BodyGyroJerkMag
+##       fid543_frequencyBodyGyroJerkMag_std frequency BodyGyroJerkMag
+##  fid552_frequencyBodyGyroJerkMag_meanFreq frequency BodyGyroJerkMag</code></pre>
+</div>
+</div>
+<div id="note" class="section level2">
+<h2>Note</h2>
+<p>It was attended that the variable descriptions would be in a single table. This had to be modified due to issues with the ability to fit the six columns in a single table. This will be researched in the future.</p>
+</div>
+<div id="license" class="section level1">
+<h1>License</h1>
 <p>Use of this dataset in publications must be acknowledged by referencing the following publication [1]</p>
 <p>[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012</p>
 <p>This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.</p>
 <p>Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.</p>
-</div>
 </div>
 
 

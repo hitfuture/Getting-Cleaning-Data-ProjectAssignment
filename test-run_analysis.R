@@ -117,3 +117,40 @@ measures<-unique(c("BodyAcc",
                    "BodyGyroMag",
                    "BodyGyroJerkMag"
 ))
+
+
+td<-read.table("activity-summary.txt",header = TRUE)
+variables<-names(td)
+feature_index<-regexpr("([0-9][0-9][0-9])",variables)
+features <- rep(NA,length(feature_index))       
+features[feature_index!=-1]<-regmatches(variables,feature_index)
+
+domain_index<-regexpr("(time|frequency)",variables)
+domains <- rep(NA,length(domain_index))
+domains[domain_index!=-1] <- regmatches(variables, domain_index)
+
+#domains<-gsub("fid[0-9][0-9][0-9]_(time|frequency|angle_)","",variables)
+measure_index<-regexpr("(BodyAcc|GravityAcc|BodyAccJerk|BodyGyro|BodyGyroJerk|BodyAccMag|GravityAccMag|BodyAccJerkMag|BodyGyroMag|BodyGyroJerkMag)",variables)
+measures <- rep(NA,length(measure_index))       
+measures[measure_index!=-1]<-regmatches(variables,measure_index)
+
+calc_index<-regexpr("(mean|std|meanFreq)",variables)
+calculations <- rep(NA,length(calc_index))       
+calculations[calc_index!=-1]<-regmatches(variables,calc_index)
+
+dim_index<-regexpr("[XYZ]|angle",variables)
+dims <- rep(NA,length(dim_index))       
+dims[dim_index!=-1]<-regmatches(variables,dim_index)
+variable.definitions<-as.data.frame(cbind(Variable.Name=variables,Feature.Id=features,Domain=domains,Signal=measures,Function=calculations,Dimension=dims))
+first<-select(variable.definitions,matches("Variable.Name|Feature.Id|Dimension")) 
+print(first,row.names=FALSE)
+second<-select(variable.definitions,one_of("Variable.Name","Domain","Signal")) 
+print(second,row.names=FALSE)
+
+#print(variable.definitions,row.names = FALSE)
+#print.variable.data<-function(row)
+#        {(paste("Variable: ",row[1],sep=": "))}
+#results<-as.vector(apply(variable.definitions,1,print.variable.data))
+
+
+```

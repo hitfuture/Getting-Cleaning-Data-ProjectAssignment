@@ -116,74 +116,23 @@ img {
 <p><strong>Script:</strong> “run_analysis.R”</p>
 <p>This is the main script that must be run to create the tidy data set. The purpose of this script is to retrieve the data from the UCI-HAR dataset, and to then process it to create a summary file that is based on the average of each variable grouped by each activity and subject.</p>
 <p><em>Processing Overview</em> The script was developed to properly load the data, and process it in a simplified method.</p>
-<p><strong>1 Clean Feature names</strong></p>
-<p>The process includes first, reading in the feature_names, and cleaning them up. The feature names that were included in the data from the file features.txt had several issues, including duplicate names, embedding of characters that would not work well as column names, and abbreviations that are difficult to understand. A function, normalize.features() is created that replaces these issues with more detail. I also created a prefix <em>fid[0-9,0-9,0-9]</em> that includes the feature identifier from the source features.txt file. This allows for simplified tracing of the data back to the source.</p>
-<p><strong>2 Read Source Data</strong><br />The next step is to read in all of the source data files. The files that were required include the following:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">File</th>
-<th align="left">Obs #</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">subject_train.txt</td>
-<td align="left">7352</td>
-<td align="left">This associates the subject identifier with the x and y training observations.</td>
-</tr>
-<tr class="even">
-<td align="left">subject_test.txt</td>
-<td align="left">2947</td>
-<td align="left">This associates the subject identifier with the x and y testing observations.</td>
-</tr>
-<tr class="odd">
-<td align="left">X_train.txt</td>
-<td align="left">7352</td>
-<td align="left">561 feature measurement columns for each observation. This is the data was sampled for ML training.</td>
-</tr>
-<tr class="even">
-<td align="left">X_test.txt</td>
-<td align="left">2947</td>
-<td align="left">561 feature measurement columns for each observation. This is the data was sampled for testing the outcome of the ML training.</td>
-</tr>
-<tr class="odd">
-<td align="left">y_train.txt</td>
-<td align="left">7352</td>
-<td align="left">This includes a single attribute that represents the activity code. This is the data was sampled for ML training.</td>
-</tr>
-<tr class="even">
-<td align="left">y_test.txt</td>
-<td align="left">2947</td>
-<td align="left">This includes a single attribute that represents the activity code. This is the data was sampled for testing the outcome of the ML training.</td>
-</tr>
-<tr class="odd">
-<td align="left">features.txt</td>
-<td align="left">561</td>
-<td align="left">This includes columns for feature identifier, and the feature description.</td>
-</tr>
-<tr class="even">
-<td align="left">activity.txt</td>
-<td align="left">6</td>
-<td align="left">Columns include activity id, and activity description.</td>
-</tr>
-<tr class="odd">
-<td align="left"><strong>activity_summary.txt</strong></td>
-<td align="left">180</td>
-<td align="left">The final summarized output file that includes the average of the mean, and standard deviation features aggregated by Activity and Subject.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>3 Combine &amp; Merge data frames</strong></p>
-<p>First combine the columns together from each of the data sets. This creats a test and training data set. Next combine the the test and training data set.</p>
-<p>Output: data.frame all.data</p>
-<p><strong>4 Label all.data</strong></p>
-<p>Add the activity labels to the all.data dataframe.</p>
-<p>Output: data.frame all.data.labeled</p>
-<p><em>5</em> <strong>Select the correct variables for all.data.labeled</strong> Only keep the columns that are the subject, activity, and those that include the mean or standard deviation. The decision was made to not include angle measurements because they are synthesis of other vectors that happen to have the term mean in their name. Use regular expressions to eliminate the other columns.</p>
-<p>Output: data.frame all.data.labeled<br /><em>6</em> <strong>Summarize all.data.labeled</strong></p>
-<p>Create a summary of the aggregates grouped by Activity and Subject. Apply to function mean() to all of the numeric measurement columns. Sort the data by Activity, and Subject Output: data.frame tidy.data (7) <strong>Write tidy.data to file</strong><br /> This file is the final output that contains the summary data from the tidy.data dataframe.<br /> Output: file “activity_summary.txt”</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Clean Feature names</strong></p>
+<pre><code>+Output: character vector feature.names</code></pre></li>
+<li><p><strong>Read Source Data</strong></p>
+<pre><code>+Output: data.frames X_test,X_train,y_test,y_train,subject.test,subject.train</code></pre></li>
+<li><p><strong>Combine &amp; Merge data frames</strong></p>
+<pre><code>+Output: data.frame all.data </code></pre></li>
+<li><p><strong>Label all.data</strong></p>
+<pre><code>+Output: data.frame all.data.labeled </code></pre></li>
+<li><p><strong>Select the correct variables for all.data.labeled</strong></p>
+<pre><code>+Output: data.frame all.data.labeled    </code></pre></li>
+<li><p><strong>Summarize all.data.labeled</strong></p>
+<pre><code>+Output: data.frame tidy.data    </code></pre></li>
+<li><p><strong>Write tidy.data to file</strong></p>
+<pre><code>+Output: file &quot;activity_summary.txt&quot;    </code></pre></li>
+</ol>
+<hr />
 <p><em>Script requirements</em></p>
 <p>Packages that must be installed:</p>
 <pre><code>install.packages(&quot;dplyr&quot;)</code></pre>
@@ -200,10 +149,11 @@ if(!file.exists(&quot;./data/projdata.zip&quot;)) {
         download.date&lt;-date()
 ##Manually unzip the file so that it can be processed.        
 }</code></pre>
+<hr />
 </div>
-<div id="additonal-informaton-about-data-sets." class="section level2">
-<h2>Additonal Informaton about data sets.</h2>
-<p>Information about the column names from the data set created in the study.<br /><a href="data/UCI-HAR/features_info.txt" title="Describes the feature names that were collected in the original study">features_info.txt</a></p>
+<div id="additonal-informaton-about-how-the-data-was-created" class="section level2">
+<h2>Additonal Informaton about how the data was created</h2>
+<p>Information about the column names from the data set X_test.txt and X_train.txt created in the study.<br /><a href="data/UCI-HAR/features_info.txt" title="Describes the feature names that were collected in the original study">features_info.txt</a></p>
 <p>Detailed documentation on the study <a href="https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2013-84.pdf" title="A Public Domain Dataset for Human Activity Recognition Using Smartphones">A Public Domain Dataset for Human Activity Recognition Using Smartphones</a></p>
 <table>
 <colgroup>

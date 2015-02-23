@@ -3,15 +3,12 @@ title: "CodeBook"
 author: "Brett Taylor"
 date: "February 22, 2015"
 output:
-  
-  md_document:
-    variant: markdown_github
-  pdf_document: default
-  html_document: default
   word_document:
     fig_caption: yes
     highlight: tango
-  
+  md_document:
+    variant: markdown_github
+  html_document: default
 ---
 ##Study Design 
 ### The steps to producing the data set. 
